@@ -1,4 +1,4 @@
-name: 📄 Generate PDFs and Deploy Docs
+name: 📄 Generate PDFs from Markdown
 
 on:
   push:
@@ -6,8 +6,6 @@ on:
     paths:
       - 'docs/**/*.md'
       - '.github/workflows/pdf-generation.yml'
-  pull_request:
-    branches: [ main ]
   workflow_dispatch:
 
 jobs:
@@ -21,7 +19,7 @@ jobs:
       - name: 📥 Checkout Repository
         uses: actions/checkout@v4
 
-      - name: 🔧 Install Pandoc
+      - name: 🔧 Install Pandoc and Dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y pandoc texlive-xetex texlive-latex-base texlive-latex-extra
@@ -33,11 +31,11 @@ jobs:
 
       - name: 📄 Generate English PDFs
         run: |
-          for i in {001..012}; do
-            input="docs/en/sec-rules/SEC-$i"*.md
-            if ls $input 1> /dev/null 2>&1; then
-              output="docs/pdf/en/SEC-$i.pdf"
-              echo "Converting SEC-$i to PDF..."
+          for file in docs/en/sec-rules/*.md; do
+            if [ -f "$file" ]; then
+              filename=$(basename "$file" .md)
+              output="docs/pdf/en/${filename}.pdf"
+              echo "Converting $filename to PDF..."
               pandoc \
                 --from markdown \
                 --to pdf \
@@ -53,17 +51,18 @@ jobs:
                 --toc-depth=2 \
                 --number-sections \
                 --output "$output" \
-                $input
+                "$file" || echo "Error converting $file"
             fi
           done
+          echo "✅ English PDFs generated"
 
       - name: 📄 Generate Spanish PDFs
         run: |
-          for i in {001..012}; do
-            input="docs/es/sec-rules/SEC-$i"*.md
-            if ls $input 1> /dev/null 2>&1; then
-              output="docs/pdf/es/SEC-$i.pdf"
-              echo "Converting SEC-$i (Spanish) to PDF..."
+          for file in docs/es/sec-rules/*.md; do
+            if [ -f "$file" ]; then
+              filename=$(basename "$file" .md)
+              output="docs/pdf/es/${filename}.pdf"
+              echo "Converting $filename to PDF..."
               pandoc \
                 --from markdown \
                 --to pdf \
@@ -79,35 +78,39 @@ jobs:
                 --toc-depth=2 \
                 --number-sections \
                 --output "$output" \
-                $input
+                "$file" || echo "Error converting $file"
             fi
           done
+          echo "✅ Spanish PDFs generated"
 
       - name: 📊 Verify PDF Generation
         run: |
-          echo "✅ English PDFs:"
-          ls -lh docs/pdf/en/ 2>/dev/null || echo "No English PDFs yet"
+          echo "📋 Files generated:"
+          find docs/pdf -name "*.pdf" -type f | wc -l
           echo ""
-          echo "✅ Spanish PDFs:"
-          ls -lh docs/pdf/es/ 2>/dev/null || echo "No Spanish PDFs yet"
+          echo "📁 English PDFs:"
+          ls -lh docs/pdf/en/ 2>/dev/null | tail -n +2 || echo "No files yet"
+          echo ""
+          echo "📁 Spanish PDFs:"
+          ls -lh docs/pdf/es/ 2>/dev/null | tail -n +2 || echo "No files yet"
 
-      - name: 📤 Commit Generated PDFs
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        run: |
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-          git add docs/pdf/ 2>/dev/null || true
-          if git diff --quiet --cached; then
-            echo "✓ No changes to commit"
-          else
-            git commit -m "docs(pdf): auto-generate PDFs [${{ github.run_number }}]"
-            git push
-          fi
-
-      - name: 📈 Upload Artifacts
+      - name: 📤 Upload Artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: security-pdfs
           path: docs/pdf/
           retention-days: 30
+
+      - name: 📤 Commit PDFs to Repository
+        if: always()
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add docs/pdf/ 2>/dev/null || true
+          if git diff --quiet --cached; then
+            echo "✓ No PDF changes to commit"
+          else
+            git commit -m "docs(pdf): auto-generate PDFs from markdown [CI skip]"
+            git push || echo "Note: Some files may not have changed"
+          fi
