@@ -1,14 +1,25 @@
 # MCP Security Documentation
 
+[![GitHub stars](https://img.shields.io/github/stars/FinkTech/mcp-security?style=flat-square)](https://github.com/FinkTech/mcp-security/stargazers)
+[![License: MIT](https://img.shields.io/badge/license-MIT-brightgreen?style=flat-square)](LICENSE)
+[![GitHub last commit](https://img.shields.io/github/last-commit/FinkTech/mcp-security?style=flat-square)](https://github.com/FinkTech/mcp-security)
+[![Awesome MCP](https://img.shields.io/badge/awesome-mcp--security-blue?style=flat-square)](https://github.com/FinkTech/mcp-security)
+
 Comprehensive security rules and best practices for MCP (Model Context Protocol) servers.
 
-## 📚 What's Included
+## 📖 Table of Contents
 
-- **12 Security Rules** - Complete OWASP Top 10 2021 coverage
-- **English & Spanish** - Full documentation in both languages
-- **Code Examples** - Vulnerable and secure implementations
-- **Compliance Mapping** - SOC2, HIPAA, PCI DSS, CWE standards
-- **Automated PDFs** - GitHub Actions generates PDFs automatically
+- [📚 What's Included](#-whats-included)
+- [🚀 Quick Start](#-quick-start)
+- [📋 Documentation](#-documentation)
+- [🔐 Security Rules](#-security-rules)
+- [📂 Directory Structure](#-directory-structure)
+- [🤖 Automation](#-automation)
+- [📊 Standards](#-standards)
+- [📄 Languages](#-languages)
+- [📝 License](#-license)
+- [🤝 Contributing](#-contributing)
+- [🔒 Security Policy](#-security-policy)
 
 ## 🚀 Quick Start
 
