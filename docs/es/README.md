@@ -40,7 +40,6 @@ docs/
 ├── guides/
 └── references/
 
-text
 
 ## 💻 Ejemplos de Código
 
@@ -53,7 +52,7 @@ Ver directorio [examples/](examples/).
 
 ## 🔗 Proyectos Relacionados
 
-- [mcp-verify](https://github.com/YOUR_USERNAME/mcp-verify) - Herramienta CLI de auditoría de seguridad para servidores MCP
+- [mcp-verify](https://github.com/FinkTech/mcp-verify) - Herramienta CLI de auditoría de seguridad para servidores MCP
 
 ## 🤝 Contribuir
 
@@ -64,5 +63,3 @@ Ver directorio [examples/](examples/).
 MIT © 2026 MCP Security Contributors
 
 ---
-
-**Hecho con ❤️ para la comunidad MCP**
