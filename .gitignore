@@ -1,0 +1,20 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Temp
+tmp/
+temp/
+*.tmp
+
+# Node (if using for PDF generation)
+node_modules/
+package-lock.json
+
+# Logs
+*.log
