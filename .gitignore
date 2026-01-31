@@ -5,8 +5,6 @@ dist/
 .env
 .env.local
 
-# PDFs (generated via GitHub Actions)
-docs/pdf/**/*.pdf
 
 # OS files
 .DS_Store
