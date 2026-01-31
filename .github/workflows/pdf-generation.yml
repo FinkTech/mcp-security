@@ -13,22 +13,24 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      pull-requests: write
-
+    
     steps:
       - name: 📥 Checkout Repository
         uses: actions/checkout@v4
-
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+      
       - name: 🔧 Install Pandoc and Dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y pandoc texlive-xetex texlive-latex-base texlive-latex-extra
-
+      
       - name: 📂 Create Output Directories
         run: |
           mkdir -p docs/pdf/en
           mkdir -p docs/pdf/es
-
+      
       - name: 📄 Generate English PDFs
         run: |
           for file in docs/en/sec-rules/*.md; do
@@ -55,7 +57,7 @@ jobs:
             fi
           done
           echo "✅ English PDFs generated"
-
+      
       - name: 📄 Generate Spanish PDFs
         run: |
           for file in docs/es/sec-rules/*.md; do
@@ -82,7 +84,7 @@ jobs:
             fi
           done
           echo "✅ Spanish PDFs generated"
-
+      
       - name: 📊 Verify PDF Generation
         run: |
           echo "📋 Files generated:"
@@ -93,24 +95,24 @@ jobs:
           echo ""
           echo "📁 Spanish PDFs:"
           ls -lh docs/pdf/es/ 2>/dev/null | tail -n +2 || echo "No files yet"
-
-      - name: 📤 Upload Artifacts
+      
+      - name: 📤 Commit and Push PDFs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/pdf/
+          if git diff --staged --quiet; then
+            echo "✓ No PDF changes to commit"
+          else
+            git commit -m "docs(pdf): auto-generate PDFs from markdown [skip ci]"
+            git push
+            echo "✅ PDFs committed and pushed successfully"
+          fi
+      
+      - name: 📤 Upload Artifacts (Backup)
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: security-pdfs
           path: docs/pdf/
           retention-days: 30
-
-      - name: 📤 Commit PDFs to Repository
-        if: always()
-        run: |
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-          git add docs/pdf/ 2>/dev/null || true
-          if git diff --quiet --cached; then
-            echo "✓ No PDF changes to commit"
-          else
-            git commit -m "docs(pdf): auto-generate PDFs from markdown [CI skip]"
-            git push || echo "Note: Some files may not have changed"
-          fi
