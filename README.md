@@ -1,124 +1,156 @@
-# MCP Security Documentation
+# 🔒 MCP Security
 
-[![GitHub stars](https://img.shields.io/github/stars/FinkTech/mcp-security?style=flat-square)](https://github.com/FinkTech/mcp-security/stargazers)
-[![License: MIT](https://img.shields.io/badge/license-MIT-brightgreen?style=flat-square)](LICENSE)
-[![GitHub last commit](https://img.shields.io/github/last-commit/FinkTech/mcp-security?style=flat-square)](https://github.com/FinkTech/mcp-security)
-[![Awesome MCP](https://img.shields.io/badge/awesome-mcp--security-blue?style=flat-square)](https://github.com/FinkTech/mcp-security)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Version](https://img.shields.io/badge/version-1.0.1-blue.svg)](https://github.com/FinkTech/mcp-security/releases)
+[![Documentation](https://img.shields.io/badge/docs-latest-blue.svg)](./docs/INDEX.md)
+[![Security](https://img.shields.io/badge/security-policy-red.svg)](./SECURITY.md)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./CONTRIBUTING.md)
 
-Comprehensive security rules and best practices for MCP (Model Context Protocol) servers.
-
-## 📖 Table of Contents
-
-- [📚 What's Included](#-whats-included)
-- [🚀 Quick Start](#-quick-start)
-- [📋 Documentation](#-documentation)
-- [🔐 Security Rules](#-security-rules)
-- [📂 Directory Structure](#-directory-structure)
-- [🤖 Automation](#-automation)
-- [📊 Standards](#-standards)
-- [📄 Languages](#-languages)
-- [📝 License](#-license)
-- [🤝 Contributing](#-contributing)
-- [🔒 Security Policy](#-security-policy)
-
-## 🚀 Quick Start
-
-```bash
-# Read documentation
-cat docs/en/sec-rules/SEC-001.md
-
-# Generate PDFs locally
-chmod +x scripts/generate-pdfs.sh
-./scripts/generate-pdfs.sh
-
-# Push to GitHub
-git init
-git add .
-git commit -m "docs: add MCP security documentation"
-git remote add origin https://github.com/YOUR_USER/mcp-security.git
-git branch -M main
-git push -u origin main
-```
-
-## 📋 Documentation
-
-- **[START-HERE.md](START-HERE.md)** - Quick orientation guide
-- **[docs/INDEX.md](docs/INDEX.md)** - Complete rules index
-- **[CONTRIBUTING.md](CONTRIBUTING.md)** - How to contribute
-- **[SECURITY.md](SECURITY.md)** - Security policy
-
-## 🔐 Security Rules
-
-All 12 rules with vulnerable/secure code examples:
-
-### 🔴 Critical (4)
-- SEC-001: Authentication Bypass
-- SEC-002: Command Injection
-- SEC-003: SQL Injection
-- SEC-006: Insecure Deserialization
-
-### 🟠 High (5)
-- SEC-004: Server-Side Request Forgery
-- SEC-005: XML External Entity
-- SEC-007: Path Traversal
-- SEC-009: Sensitive Data Exposure
-- SEC-012: Weak Cryptography
-
-### 🟡 Medium (3)
-- SEC-008: Data Leakage in Responses
-- SEC-010: Missing Rate Limiting
-- SEC-011: Regular Expression DoS
-
-## 📂 Directory Structure
-
-```
-mcp-security/
-├── docs/
-│   ├── INDEX.md
-│   ├── en/sec-rules/        (12 English rules)
-│   ├── es/sec-rules/        (12 Spanish rules)
-│   ├── es/README.es.md      (Spanish introduction)
-│   └── pdf/                 (auto-generated PDFs)
-├── scripts/generate-pdfs.sh
-├── .github/workflows/pdf-generation.yml
-└── LICENSE (MIT)
-```
-
-## 🤖 Automation
-
-GitHub Actions automatically:
-- Generates PDFs from markdown
-- Validates markdown syntax
-- Runs security checks
-- Creates release artifacts
-
-## 📊 Standards
-
-✅ OWASP Top 10 2021  
-✅ SOC2 Type II (CC6, CC7)  
-✅ HIPAA §164.312  
-✅ PCI DSS v4.0  
-✅ CWE/MITRE 13 weakness IDs
-
-## 📄 Languages
-
-- **English**: Primary documentation (docs/en/)
-- **Spanish**: Full translation (docs/es/)
-
-## 📝 License
-
-MIT License - Free for commercial and personal use
-
-## 🤝 Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
-
-## 🔒 Security Policy
-
-Found a vulnerability? See [SECURITY.md](SECURITY.md)
+**Comprehensive security guidelines for Model Context Protocol (MCP) servers** with compliance mapping (SOC2, HIPAA, PCI DSS).
 
 ---
 
-**Version:** 1.0.0  
-**Status:** Production Ready  
-**Last Updated:** January 25, 2026
+## 📚 Quick Navigation
+
+| What | Where |
+|------|-------|
+| 📋 Complete index | [`docs/INDEX.md`](./docs/INDEX.md) |
+| 🇬🇧 English docs | [`docs/en/`](./docs/en/) |
+| 🇪🇸 Documentación español | [`docs/es/`](./docs/es/) |
+| 💻 Code examples | [`examples/`](./examples/) |
+| 📄 PDFs | Auto-generated (GitHub Actions) or local: `scripts/generate-pdfs.sh` |
+| 🤝 Contributing | [`CONTRIBUTING.md`](./CONTRIBUTING.md) |
+| 🔒 Security policy | [`SECURITY.md`](./SECURITY.md) |
+
+---
+
+## ✨ Features
+
+- **12 Security Rules (SEC-001 to SEC-012)**: Each with vulnerable vs secure examples
+- **OWASP/CWE Mapping** + Compliance (SOC2, HIPAA, PCI DSS)
+- **Multi-language examples**: Go, Node.js, Python
+- **Bilingual documentation**: English + Spanish
+- **Auto-generated PDFs**: Available in `docs/pdf/en/` and `docs/pdf/es/`
+
+---
+
+## 📂 Repository Structure
+
+```text
+mcp-security/
+├── docs/
+│   ├── INDEX.md              # Complete index
+│   ├── en/                   # English documentation
+│   │   ├── README.md
+│   │   ├── START-HERE.md
+│   │   ├── SECURITY.md
+│   │   └── sec-rules/        # SEC-001 to SEC-012
+│   ├── es/                   # Spanish documentation
+│   │   ├── README.md
+│   │   ├── START-HERE.md
+│   │   ├── SECURITY.md
+│   │   └── sec-rules/        # SEC-001 a SEC-012
+│   └── pdf/                  # Auto-generated PDFs
+│       ├── en/
+│       └── es/
+├── examples/                 # Code examples by language
+│   ├── go/
+│   ├── nodejs/
+│   └── python/
+├── scripts/
+│   └── generate-pdfs.sh      # PDF generation script
+├── .github/
+│   ├── workflows/            # CI/CD automation
+│   ├── ISSUE_TEMPLATE/
+│   └── PULL_REQUEST_TEMPLATE.md
+├── CONTRIBUTING.md
+├── SECURITY.md
+├── LICENSE
+└── README.md                 # This file
+```
+
+---
+
+## 🎯 Use Cases
+
+### For Developers
+- Apply security rules to your MCP servers
+- Use code examples as reference
+- Integrate compliance requirements
+
+### For Security Teams
+- Audit MCP implementations
+- Map controls to frameworks (SOC2, HIPAA, PCI DSS)
+- Use PDFs for documentation
+
+### For Organizations
+- Establish security baselines
+- Train development teams
+- Maintain compliance
+
+---
+
+## 🌍 Available Languages
+
+- 🇬🇧 **English**: [`docs/en/`](./docs/en/)
+- 🇪🇸 **Español**: [`docs/es/`](./docs/es/)
+
+---
+
+## 📄 PDF Generation
+
+PDFs are automatically generated on push via GitHub Actions.
+
+**Manual generation:**
+```bash
+./scripts/generate-pdfs.sh
+```
+
+PDFs will be created in:
+- `docs/pdf/en/` (English)
+- `docs/pdf/es/` (Spanish)
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! See [`CONTRIBUTING.md`](./CONTRIBUTING.md) for:
+- How to propose new rules
+- Documentation guidelines
+- Code examples standards
+- Translation workflow
+
+---
+
+## 🔒 Security
+
+Found a vulnerability? Please report responsibly.
+
+See [`SECURITY.md`](./SECURITY.md) for:
+- How to report security issues
+- Response time expectations
+- Disclosure process
+
+---
+
+## 📜 License
+
+MIT License - see [`LICENSE`](./LICENSE) for details.
+
+---
+
+## 💬 Support
+
+- 🐛 **Bug reports**: [Open an issue](https://github.com/FinkTech/mcp-security/issues)
+- 💡 **Feature requests**: [Start a discussion](https://github.com/FinkTech/mcp-security/discussions)
+- 📧 **Contact**: hello.finksystems@gmail.com
+
+---
+
+## 🙏 Acknowledgments
+
+Special thanks to all contributors and security researchers who help improve MCP security.
+
+---
+
+**Start here**: [`docs/INDEX.md`](./docs/INDEX.md) → Choose a rule → Apply it to your code 🚀

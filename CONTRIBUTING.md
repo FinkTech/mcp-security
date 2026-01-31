@@ -48,7 +48,7 @@ Ready to contribute code or documentation?
 
 Use clear commit messages:
 
-```
+```text
 # Good
 docs: improve SEC-001 example code
 
@@ -76,6 +76,21 @@ changes
 - Fix typos or clarifications
 - Add more examples
 - Enhance explanations
+- Propose new security rules (SEC-013+)
+
+### New Security Rules
+
+Want to propose a new rule?
+
+1. Check if it's not already covered (SEC-001 to SEC-012)
+2. Open an **Issue** with label "new-rule"
+3. Include:
+   - Rule name and category
+   - OWASP/CWE mapping
+   - Vulnerable example
+   - Secure implementation
+   - Compliance impact (SOC2, HIPAA, PCI DSS)
+4. Wait for community feedback before submitting PR
 
 ### Translations
 - Translate to new languages
@@ -100,7 +115,9 @@ changes
 
 ## Code of Conduct
 
-Be respectful and professional. We welcome all contributors and maintain a harassment-free environment.
+This project adheres to the [Contributor Covenant Code of Conduct](./CODE_OF_CONDUCT.md). 
+
+By participating, you are expected to uphold this code. Please report unacceptable behavior to hello.finksystems@gmail.com.
 
 ## Questions?
 

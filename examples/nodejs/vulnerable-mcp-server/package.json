@@ -1,0 +1,68 @@
+{
+  "name": "vulnerable-mcp-development-assistant",
+  "version": "1.0.0",
+  "description": "A vulnerable MCP server for educational purposes - demonstrates security anti-patterns",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node dist/index.js",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "security",
+    "vulnerable",
+    "educational",
+    "development-tools"
+  ],
+  "author": "MCP Security Team",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "vulnerabilities": {
+    "note": "The following dependencies are intentionally outdated to demonstrate SEC-011",
+    "intentionally_vulnerable": [
+      {
+        "package": "lodash",
+        "version": "4.17.15",
+        "vulnerability": "CVE-2019-10744, CVE-2020-8203",
+        "description": "Prototype pollution vulnerabilities"
+      },
+      {
+        "package": "moment",
+        "version": "2.24.0",
+        "vulnerability": "CVE-2022-24785, CVE-2022-31129",
+        "description": "Regular expression denial of service"
+      },
+      {
+        "package": "axios",
+        "version": "0.18.0",
+        "vulnerability": "CVE-2020-28168",
+        "description": "Server-Side Request Forgery"
+      }
+    ]
+  },
+  "optionalDependencies": {
+    "lodash": "4.17.15",
+    "moment": "2.24.0",
+    "axios": "0.18.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FinkTech/mcp-security.git"
+  },
+  "bugs": {
+    "url": "https://github.com/FinkTech/mcp-security/issues"
+  }
+}

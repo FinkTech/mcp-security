@@ -1,0 +1,607 @@
+{
+  "server_name": "development-assistant",
+  "url": "transport",
+  "status": "valid",
+  "protocol_version": "2024-11-05",
+  "security": {
+    "score": 0,
+    "level": "High Risk",
+    "findings": [
+      {
+        "severity": "high",
+        "message": "La herramienta \"file_operations\" tiene el parámetro de ruta \"path\" sin patrón de validación",
+        "component": "tool:file_operations",
+        "ruleCode": "SEC-001",
+        "location": {
+          "type": "tool",
+          "name": "file_operations",
+          "parameter": "path"
+        },
+        "evidence": {
+          "toolName": "file_operations",
+          "parameterName": "path",
+          "parameterType": "string",
+          "description": "File path",
+          "hasPattern": false
+        },
+        "remediation": "Add a regex pattern to validate the \"path\" parameter. Example: \"^[a-zA-Z0-9_/-]+.txt$\" to allow only safe filenames."
+      },
+      {
+        "severity": "high",
+        "message": "La herramienta \"code_analysis\" tiene el parámetro de ruta \"file\" sin patrón de validación",
+        "component": "tool:code_analysis",
+        "ruleCode": "SEC-001",
+        "location": {
+          "type": "tool",
+          "name": "code_analysis",
+          "parameter": "file"
+        },
+        "evidence": {
+          "toolName": "code_analysis",
+          "parameterName": "file",
+          "parameterType": "string",
+          "description": "File to analyze",
+          "hasPattern": false
+        },
+        "remediation": "Add a regex pattern to validate the \"file\" parameter. Example: \"^[a-zA-Z0-9_/-]+.txt$\" to allow only safe filenames."
+      },
+      {
+        "severity": "high",
+        "message": "Resource \"Project Files\" has dynamic URI without documented restrictions",
+        "component": "resource:Project Files",
+        "ruleCode": "SEC-001",
+        "location": {
+          "type": "resource",
+          "uri": "project://files/{path}",
+          "name": "Project Files"
+        },
+        "evidence": {
+          "resourceName": "Project Files",
+          "uri": "project://files/{path}",
+          "mimeType": "text/plain",
+          "hasDynamicSegments": true,
+          "dynamicIndicators": [
+            "curly brace variable: {path}"
+          ]
+        },
+        "remediation": "Ensure the server validates and sanitizes URI parameters. Consider using a whitelist of allowed paths or implementing strict input validation."
+      },
+      {
+        "severity": "critical",
+        "message": "Inyección de Comandos Potencial: El parámetro \"command\" en la herramienta \"execute_command\" carece de patrón de validación",
+        "component": "tool:execute_command",
+        "ruleCode": "SEC-002",
+        "location": {
+          "type": "tool",
+          "name": "execute_command",
+          "parameter": "command"
+        },
+        "evidence": {
+          "risk": "Unsanitized input in potential command execution context",
+          "parameter": "command"
+        },
+        "remediation": "Implement a strict whitelist regex (e.g., ^[a-zA-Z0-9]+$) to prevent shell metacharacter injection."
+      },
+      {
+        "severity": "critical",
+        "message": "Inyección de Comandos Potencial: El parámetro \"tool\" en la herramienta \"code_analysis\" carece de patrón de validación",
+        "component": "tool:code_analysis",
+        "ruleCode": "SEC-002",
+        "location": {
+          "type": "tool",
+          "name": "code_analysis",
+          "parameter": "tool"
+        },
+        "evidence": {
+          "risk": "Unsanitized input in potential command execution context",
+          "parameter": "tool"
+        },
+        "remediation": "Implement a strict whitelist regex (e.g., ^[a-zA-Z0-9]+$) to prevent shell metacharacter injection."
+      },
+      {
+        "severity": "critical",
+        "message": "Inyección de Comandos Potencial: El parámetro \"file\" en la herramienta \"code_analysis\" carece de patrón de validación",
+        "component": "tool:code_analysis",
+        "ruleCode": "SEC-002",
+        "location": {
+          "type": "tool",
+          "name": "code_analysis",
+          "parameter": "file"
+        },
+        "evidence": {
+          "risk": "Unsanitized input in potential command execution context",
+          "parameter": "file"
+        },
+        "remediation": "Implement a strict whitelist regex (e.g., ^[a-zA-Z0-9]+$) to prevent shell metacharacter injection."
+      },
+      {
+        "severity": "critical",
+        "message": "Inyección de Comandos Potencial: El parámetro \"query\" en la herramienta \"database_tools\" carece de patrón de validación",
+        "component": "tool:database_tools",
+        "ruleCode": "SEC-002",
+        "location": {
+          "type": "tool",
+          "name": "database_tools",
+          "parameter": "query"
+        },
+        "evidence": {
+          "risk": "Unsanitized input in potential command execution context",
+          "parameter": "query"
+        },
+        "remediation": "Implement a strict whitelist regex (e.g., ^[a-zA-Z0-9]+$) to prevent shell metacharacter injection."
+      },
+      {
+        "severity": "critical",
+        "message": "Inyección de Comandos Potencial: El parámetro \"database\" en la herramienta \"database_tools\" carece de patrón de validación",
+        "component": "tool:database_tools",
+        "ruleCode": "SEC-002",
+        "location": {
+          "type": "tool",
+          "name": "database_tools",
+          "parameter": "database"
+        },
+        "evidence": {
+          "risk": "Unsanitized input in potential command execution context",
+          "parameter": "database"
+        },
+        "remediation": "Implement a strict whitelist regex (e.g., ^[a-zA-Z0-9]+$) to prevent shell metacharacter injection."
+      },
+      {
+        "severity": "high",
+        "message": "Potential SSRF: Parameter \"repo\" accepts URLs but lacks domain validation",
+        "component": "tool:git_operations",
+        "ruleCode": "SEC-003",
+        "location": {
+          "type": "tool",
+          "name": "git_operations",
+          "parameter": "repo"
+        },
+        "evidence": {
+          "parameter": "repo",
+          "risk": "Arbitrary URL access"
+        },
+        "remediation": "Restrict input to specific allowed domains using a strict regex pattern (e.g., ^https://api.example.com/)."
+      },
+      {
+        "severity": "critical",
+        "message": "Potential SQL Injection: Parameter \"query\" in tool \"database_tools\" lacks validation pattern",
+        "component": "tool:database_tools",
+        "ruleCode": "SEC-007",
+        "location": {
+          "type": "tool",
+          "name": "database_tools",
+          "parameter": "query"
+        },
+        "evidence": {
+          "risk": "Unsanitized input in SQL query context",
+          "parameter": "query",
+          "hasSafePractices": false
+        },
+        "remediation": "Use prepared statements with placeholders AND implement strict input validation (e.g., ^[a-zA-Z0-9_]+$ for identifiers)."
+      },
+      {
+        "severity": "high",
+        "message": "Tool \"database_tools\" executes SQL but doesn't mention using prepared statements or parameterized queries",
+        "component": "tool:database_tools",
+        "ruleCode": "SEC-007",
+        "evidence": {
+          "missingIndicators": "prepared statement, parameterized, placeholder, bind parameter, orm, sequelize, typeorm, prisma, knex, drizzle"
+        },
+        "remediation": "Update tool description to explicitly state use of prepared statements, ORMs, or query builders. Never concatenate user input into SQL strings."
+      },
+      {
+        "severity": "medium",
+        "message": "Sensitive parameter \"message\" (personal) lacks format specification",
+        "component": "tool:git_operations",
+        "ruleCode": "SEC-010",
+        "location": {
+          "type": "tool",
+          "name": "git_operations",
+          "parameter": "message"
+        },
+        "evidence": {
+          "category": "personal",
+          "risk": "No format validation for sensitive data"
+        },
+        "remediation": "Set appropriate format (e.g., format: \"password\" for credentials, format: \"email\" for emails). Implement validation pattern."
+      },
+      {
+        "severity": "medium",
+        "message": "Sensitive parameter \"message\" (personal) has no validation pattern",
+        "component": "tool:git_operations",
+        "ruleCode": "SEC-010",
+        "location": {
+          "type": "tool",
+          "name": "git_operations",
+          "parameter": "message"
+        },
+        "evidence": {
+          "category": "personal",
+          "risk": "Invalid data format could be accepted"
+        },
+        "remediation": "Validate date formats (YYYY-MM-DD). Implement age range checks."
+      },
+      {
+        "severity": "medium",
+        "message": "Sensitive parameter \"package\" (personal) lacks format specification",
+        "component": "tool:dependency_manager",
+        "ruleCode": "SEC-010",
+        "location": {
+          "type": "tool",
+          "name": "dependency_manager",
+          "parameter": "package"
+        },
+        "evidence": {
+          "category": "personal",
+          "risk": "No format validation for sensitive data"
+        },
+        "remediation": "Set appropriate format (e.g., format: \"password\" for credentials, format: \"email\" for emails). Implement validation pattern."
+      },
+      {
+        "severity": "medium",
+        "message": "Sensitive parameter \"package\" (personal) has no validation pattern",
+        "component": "tool:dependency_manager",
+        "ruleCode": "SEC-010",
+        "location": {
+          "type": "tool",
+          "name": "dependency_manager",
+          "parameter": "package"
+        },
+        "evidence": {
+          "category": "personal",
+          "risk": "Invalid data format could be accepted"
+        },
+        "remediation": "Validate date formats (YYYY-MM-DD). Implement age range checks."
+      },
+      {
+        "severity": "medium",
+        "message": "Tool \"file_operations\" performs file operations without rate limiting",
+        "component": "tool:file_operations",
+        "ruleCode": "SEC-011",
+        "evidence": {
+          "operationTypes": [
+            "file"
+          ],
+          "risk": "Unlimited requests can exhaust resources, cause DoS, or enable brute-force attacks"
+        },
+        "remediation": "Implement rate limiting with the following guidelines:\n- File uploads: 10 files per hour, max 10MB per file\n- Implement upload quotas per user\n\nConfiguration options:\n- Add x-rate-limit extension to tool schema\n- Document rate limits in tool description\n- Return 429 Too Many Requests with Retry-After header"
+      },
+      {
+        "severity": "medium",
+        "message": "Tool \"dependency_manager\" performs database operations without rate limiting",
+        "component": "tool:dependency_manager",
+        "ruleCode": "SEC-011",
+        "evidence": {
+          "operationTypes": [
+            "database"
+          ],
+          "risk": "Unlimited requests can exhaust resources, cause DoS, or enable brute-force attacks"
+        },
+        "remediation": "Implement rate limiting with the following guidelines:\n- Database queries: 100 requests per minute per user\n- Implement query result caching\n\nConfiguration options:\n- Add x-rate-limit extension to tool schema\n- Document rate limits in tool description\n- Return 429 Too Many Requests with Retry-After header"
+      },
+      {
+        "severity": "medium",
+        "message": "Tool \"database_tools\" performs database operations without rate limiting",
+        "component": "tool:database_tools",
+        "ruleCode": "SEC-011",
+        "evidence": {
+          "operationTypes": [
+            "database"
+          ],
+          "risk": "Unlimited requests can exhaust resources, cause DoS, or enable brute-force attacks"
+        },
+        "remediation": "Implement rate limiting with the following guidelines:\n- Database queries: 100 requests per minute per user\n- Implement query result caching\n\nConfiguration options:\n- Add x-rate-limit extension to tool schema\n- Document rate limits in tool description\n- Return 429 Too Many Requests with Retry-After header"
+      },
+      {
+        "severity": "critical",
+        "message": "Potential RCE capability detected in tool",
+        "component": "tool:execute_command",
+        "ruleCode": "HEURISTIC"
+      },
+      {
+        "severity": "medium",
+        "message": "Filesystem modification detected in tool",
+        "component": "tool:file_operations",
+        "ruleCode": "HEURISTIC"
+      },
+      {
+        "severity": "critical",
+        "message": "Potential RCE capability detected in tool",
+        "component": "tool:code_analysis",
+        "ruleCode": "HEURISTIC"
+      },
+      {
+        "severity": "high",
+        "message": "Credential/Auth handling detected in tool",
+        "component": "tool:environment_manager",
+        "ruleCode": "HEURISTIC"
+      },
+      {
+        "severity": "critical",
+        "message": "Potential RCE capability detected in tool",
+        "component": "tool:database_tools",
+        "ruleCode": "HEURISTIC"
+      },
+      {
+        "severity": "medium",
+        "message": "Database operations detected in tool",
+        "component": "tool:database_tools",
+        "ruleCode": "HEURISTIC"
+      }
+    ]
+  },
+  "quality": {
+    "score": 100,
+    "issues": []
+  },
+  "protocolCompliance": {
+    "passed": true,
+    "score": 100,
+    "issues": []
+  },
+  "tools": {
+    "count": 8,
+    "valid": 8,
+    "invalid": 0,
+    "items": [
+      {
+        "name": "execute_command",
+        "description": "Execute shell commands (git, npm, docker, etc.)",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "command": {
+              "type": "string",
+              "description": "Shell command to execute"
+            }
+          },
+          "required": [
+            "command"
+          ]
+        },
+        "status": "valid"
+      },
+      {
+        "name": "file_operations",
+        "description": "Read, write, or search files",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "type": "string",
+              "enum": [
+                "read",
+                "write",
+                "search"
+              ],
+              "description": "Operation to perform"
+            },
+            "path": {
+              "type": "string",
+              "description": "File path"
+            },
+            "content": {
+              "type": "string",
+              "description": "Content to write (for write operation)"
+            }
+          },
+          "required": [
+            "operation",
+            "path"
+          ]
+        },
+        "status": "valid"
+      },
+      {
+        "name": "git_operations",
+        "description": "Perform git operations (clone, commit, push, config)",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "action": {
+              "type": "string",
+              "description": "Git action to perform"
+            },
+            "repo": {
+              "type": "string",
+              "description": "Repository URL"
+            },
+            "message": {
+              "type": "string",
+              "description": "Commit message"
+            }
+          },
+          "required": [
+            "action"
+          ]
+        },
+        "status": "valid"
+      },
+      {
+        "name": "dependency_manager",
+        "description": "Install or update npm/pip packages",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "action": {
+              "type": "string",
+              "enum": [
+                "install",
+                "update"
+              ],
+              "description": "Action to perform"
+            },
+            "package": {
+              "type": "string",
+              "description": "Package name"
+            }
+          },
+          "required": [
+            "action",
+            "package"
+          ]
+        },
+        "status": "valid"
+      },
+      {
+        "name": "code_analysis",
+        "description": "Run linters, formatters, and complexity analysis",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "tool": {
+              "type": "string",
+              "description": "Analysis tool to use"
+            },
+            "file": {
+              "type": "string",
+              "description": "File to analyze"
+            }
+          },
+          "required": [
+            "tool",
+            "file"
+          ]
+        },
+        "status": "valid"
+      },
+      {
+        "name": "ai_code_assistant",
+        "description": "AI-powered code completion and refactoring",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "task": {
+              "type": "string",
+              "description": "Task to perform"
+            },
+            "code": {
+              "type": "string",
+              "description": "Code to analyze"
+            },
+            "prompt": {
+              "type": "string",
+              "description": "Custom prompt"
+            }
+          },
+          "required": [
+            "task",
+            "code"
+          ]
+        },
+        "status": "valid"
+      },
+      {
+        "name": "environment_manager",
+        "description": "Manage environment variables and secrets",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "action": {
+              "type": "string",
+              "enum": [
+                "read",
+                "write",
+                "list"
+              ],
+              "description": "Action to perform"
+            },
+            "key": {
+              "type": "string",
+              "description": "Environment variable key"
+            },
+            "value": {
+              "type": "string",
+              "description": "Value to set"
+            }
+          },
+          "required": [
+            "action"
+          ]
+        },
+        "status": "valid"
+      },
+      {
+        "name": "database_tools",
+        "description": "Execute queries on development database",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "SQL query to execute"
+            },
+            "database": {
+              "type": "string",
+              "description": "Database name"
+            }
+          },
+          "required": [
+            "query"
+          ]
+        },
+        "status": "valid"
+      }
+    ]
+  },
+  "resources": {
+    "count": 4,
+    "valid": 4,
+    "invalid": 0,
+    "items": [
+      {
+        "name": "Project Files",
+        "uri": "project://files/{path}",
+        "mimeType": "text/plain",
+        "status": "valid"
+      },
+      {
+        "name": "Git Status",
+        "uri": "project://git/status",
+        "mimeType": "application/json",
+        "status": "valid"
+      },
+      {
+        "name": "Configuration",
+        "uri": "project://config",
+        "mimeType": "application/json",
+        "status": "valid"
+      },
+      {
+        "name": "Application Logs",
+        "uri": "project://logs",
+        "mimeType": "text/plain",
+        "status": "valid"
+      }
+    ]
+  },
+  "prompts": {
+    "count": 3,
+    "valid": 3,
+    "invalid": 0,
+    "items": [
+      {
+        "name": "code_review",
+        "description": "Analyze code and suggest improvements",
+        "status": "valid"
+      },
+      {
+        "name": "debug_assistant",
+        "description": "Help debug errors",
+        "status": "valid"
+      },
+      {
+        "name": "deployment_guide",
+        "description": "Generate deployment plan",
+        "status": "valid"
+      }
+    ]
+  },
+  "timestamp": "2026-01-30T22:13:03.646Z",
+  "duration_ms": 435,
+  "badges": {
+    "url": "https://img.shields.io/badge/MCP_Security-0%25-red",
+    "markdown": "![Puntuación de seguridad MCP](https://img.shields.io/badge/MCP_Security-0%25-red)",
+    "html": "<img src=\"https://img.shields.io/badge/MCP_Security-0%25-red\" alt=\"Puntuación de seguridad MCP\" />"
+  }
+}

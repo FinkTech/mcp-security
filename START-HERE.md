@@ -109,4 +109,5 @@ Welcome! If you just cloned/downloaded this project, **start here**.
 
 ---
 
+**Last updated:** January 29, 2026
 **Welcome aboard! 🎉**

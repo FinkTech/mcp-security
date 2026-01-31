@@ -2,10 +2,10 @@
 
 > Guías completas de seguridad para servidores Model Context Protocol con mapeo de cumplimiento SOC2, HIPAA y PCI-DSS
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Documentation](https://img.shields.io/badge/docs-latest-blue)](docs/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../../LICENSE)
+[![Documentation](https://img.shields.io/badge/docs-latest-blue)](../INDEX.md)
 
-[🇬🇧 English](./README.md)
+[🇬🇧 English](../en/README.md)
 
 ## 📚 Documentación
 
@@ -19,14 +19,14 @@ Este repositorio contiene documentación completa de seguridad para servidores M
 ## 📥 Descargar PDFs
 
 ### Español
-- [SEC-001: Falta de Autenticación](pdfs/es/SEC-001-Autenticacion.pdf)
-- [SEC-002: Inyección de Comandos](pdfs/es/SEC-002-InyeccionComandos.pdf)
-- [Guía Completa (Todas las Reglas)](pdfs/es/MCP-Security-Guia-Completa.pdf)
+- [SEC-001: Falta de Autenticación](../pdf/es/SEC-001-Autenticacion.pdf)
+- [SEC-002: Inyección de Comandos](../pdf/es/SEC-002-InyeccionComandos.pdf)
+- [Guía Completa (Todas las Reglas)](../pdf/es/MCP-Security-Guia-Completa.pdf)
 
 ### English
-- [SEC-001: Authentication Bypass](pdfs/en/SEC-001-Authentication.pdf)
-- [SEC-002: Command Injection](pdfs/en/SEC-002-CommandInjection.pdf)
-- [Complete Guide (All Rules)](pdfs/en/MCP-Security-Complete-Guide.pdf)
+- [SEC-001: Authentication Bypass](../pdf/en/SEC-001-Authentication.pdf)
+- [SEC-002: Command Injection](../pdf/en/SEC-002-CommandInjection.pdf)
+- [Complete Guide (All Rules)](../pdf/en/MCP-Security-Complete-Guide.pdf)
 
 ## 📖 Estructura de Documentación
 
@@ -48,7 +48,7 @@ Ejemplos de código funcionales disponibles en:
 - **Python**: Python 3.10+ con type hints
 - **Go**: Go 1.21+ con mejores prácticas
 
-Ver directorio [examples/](examples/).
+Ver directorio [examples/](../../examples/).
 
 ## 🔗 Proyectos Relacionados
 
@@ -56,7 +56,7 @@ Ver directorio [examples/](examples/).
 
 ## 🤝 Contribuir
 
-¡Las contribuciones son bienvenidas! Lee [CONTRIBUTING.md](CONTRIBUTING.md).
+¡Las contribuciones son bienvenidas! Lee [CONTRIBUTING.md](../../CONTRIBUTING.md).
 
 ## 📄 Licencia
 

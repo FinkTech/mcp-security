@@ -1,0 +1,90 @@
+name: 🐛 Bug report (docs/rules)
+description: Report an issue in the rules, code examples, PDFs, or navigation.
+title: "[BUG]: "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report! Please fill this in so we can reproduce it quickly.
+
+  - type: dropdown
+    id: language
+    attributes:
+      label: Affected language
+      options:
+        - English (en)
+        - Spanish (es)
+        - Both
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Affected area
+      options:
+        - Rule content (SEC-001..SEC-012)
+        - Rule code examples (vulnerable/secure)
+        - Index / Navigation
+        - PDFs generation/output
+        - Scripts / Automation
+        - Other (explain below)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: rule
+    attributes:
+      label: If a rule is affected, which one?
+      options:
+        - N/A
+        - SEC-001
+        - SEC-002
+        - SEC-003
+        - SEC-004
+        - SEC-005
+        - SEC-006
+        - SEC-007
+        - SEC-008
+        - SEC-009
+        - SEC-010
+        - SEC-011
+        - SEC-012
+    validations:
+      required: true
+
+  - type: textarea
+    id: what_happened
+    attributes:
+      label: What happened?
+      description: What is wrong, and where did you see it (file path + section)?
+      placeholder: "docs/en/sec-rules/SEC-004.md — Secure example uses ..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect to happen?
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce (if applicable)
+      placeholder: |
+        1) Go to ...
+        2) Click ...
+        3) See ...
+    validations:
+      required: false
+
+  - type: input
+    id: link
+    attributes:
+      label: Direct link to file/section (optional)
+      placeholder: https://github.com/FinkTech/mcp-security/blob/main/docs/...
+    validations:
+      required: false

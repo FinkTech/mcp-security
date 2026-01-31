@@ -189,7 +189,7 @@ app.listen(3000);
 
 1. **Usar APIs Parametrizadas en Lugar de Comandos Shell**: Reemplazar `child_process.exec()` con `child_process.spawn()` o `child_process.execFile()` y pasar argumentos como un array. Siempre establecer `shell: false` para prevenir interpretación shell. Esto asegura que los argumentos se pasen directamente al ejecutable sin procesamiento shell.
 
-2. **Implementar Validación Estricta de Entradas**: Crear listas blancas para valores permitidos (formatos de archivo, comandos, parámetros). Usar expresiones regulares para validar el formato de entrada y rechazar cualquier entrada que contenga metacaracteres shell (`; | & $ > < \` \n`). Validar tanto el formato como el significado semántico de la entrada.
+2. **Implementar Validación Estricta de Entradas**: Crear listas blancas para valores permitidos (formatos de archivo, comandos, parámetros). Usar expresiones regulares para validar el formato de entrada y rechazar cualquier entrada que contenga metacaracteres shell (por ejemplo: `;`, `|`, `&`, `$`, `>`, `<`, `\` y secuencias como `\n`). Validar tanto el formato como el significado semántico de la entrada.
 
 3. **Aplicar el Principio de Mínimo Privilegio**: Ejecutar el proceso del servidor MCP con permisos mínimos del sistema. Usar características del sistema operativo como jaulas chroot, contenedores o sandboxing para limitar el impacto de una inyección de comandos exitosa. Nunca ejecutar procesos del servidor como root o administrador.
 

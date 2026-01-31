@@ -1,0 +1,45 @@
+name: ✨ Feature request / improvement
+description: Propose a new rule, improve an existing one, or enhance usability.
+title: "[FEATURE]: "
+labels: ["enhancement"]
+body:
+  - type: dropdown
+    id: type
+    attributes:
+      label: What kind of request is this?
+      options:
+        - New security rule (SEC-0XX)
+        - Improve an existing rule (SEC-001..SEC-012)
+        - New examples / more languages/frameworks
+        - Structure / navigation improvements
+        - Accessibility (quick reference, decision tree, etc.)
+        - PDFs / automation improvements
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem statement
+      description: What problem does this solve? Who benefits?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: What should be added/changed? If possible, outline the sections/files.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Suggested priority
+      options:
+        - High (blocks adoption / important correctness)
+        - Medium (strong improvement)
+        - Low (nice-to-have)
+    validations:
+      required: true

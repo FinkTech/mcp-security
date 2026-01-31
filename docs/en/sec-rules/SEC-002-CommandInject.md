@@ -189,7 +189,7 @@ app.listen(3000);
 
 1. **Use Parameterized APIs Instead of Shell Commands**: Replace `child_process.exec()` with `child_process.spawn()` or `child_process.execFile()` and pass arguments as an array. Always set `shell: false` to prevent shell interpretation. This ensures arguments are passed directly to the executable without shell processing.
 
-2. **Implement Strict Input Validation**: Create whitelists for allowed values (file formats, commands, parameters). Use regular expressions to validate input format and reject any input containing shell metacharacters (`; | & $ > < \` \n`). Validate both the format and semantic meaning of input.
+2. **Implement Strict Input Validation**: Create whitelists for allowed values (file formats, commands, parameters). Use regular expressions to validate input format and reject any input containing shell metacharacters (for example: `;`, `|`, `&`, `$`, `>`, `<`, `\`, and sequences like `\n`). Validate both the format and semantic meaning of input.
 
 3. **Apply the Principle of Least Privilege**: Run the MCP server process with minimal system permissions. Use operating system features like chroot jails, containers, or sandboxing to limit the impact of successful command injection. Never run server processes as root or administrator.
 
